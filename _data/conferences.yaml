@@ -1,25 +1,224 @@
 # Example entries to seed the tracker.
 # Dates use DD.MM.YYYY.
 conferences:
-  - name: Advancing Earth Observation Forum 2026
-    acronym: AEO26
-    focus: Earth Observation
-    conference_start: 09.11.2026
-    conference_end: 12.11.2026
-    early_bird_deadline: 12.06.2026
-    registration_price: AUD 595 early bird / AUD 795 standard
-    location: Hobart, Tasmania, Australia
-    website: https://www.earthobsforum.org/registration
+  - name: World Satellite Business Week
+    acronym: WSBW
+    focus: satellite business / operators / investors
+    conference_start: 14.09.2026
+    conference_end: 18.09.2026
+    early_bird_deadline: 01.06.2026
+    registration_price: EUR 2500+
+    location: Paris, France
+    website: https://www.satellite-business.com/
 
-  - name: UK Earth Observation Conference 2026
-    acronym: UKEO2026
-    focus: Earth Observation
-    conference_start: 15.09.2026
+  - name: SpaceOps Conference
+    acronym: SpaceOps
+    focus: mission operations
+    conference_start: 10.05.2027
+    conference_end: 14.05.2027
+    early_bird_deadline: 15.02.2027
+    registration_price: TBD
+    location: Munich, Germany
+    website: https://spaceops2027.org/
+
+  - name: IEEE Aerospace Conference
+    acronym: IEEE AeroConf
+    focus: aerospace systems / onboard systems
+    conference_start: 07.03.2026
+    conference_end: 14.03.2026
+    early_bird_deadline: 15.12.2025
+    registration_price: USD 900+
+    location: Big Sky, Montana, USA
+    website: https://aeroconf.org/
+
+  - name: International Astronautical Congress
+    acronym: IAC
+    focus: global space ecosystem
+    conference_start: 29.09.2026
+    conference_end: 03.10.2026
+    early_bird_deadline: 30.05.2026
+    registration_price: EUR 900+
+    location: Antalya, Turkey
+    website: https://www.iafastro.org/events/iac/
+
+  - name: Small Satellite Conference
+    acronym: SmallSat
+    focus: small satellites / onboard computing
+    conference_start: 23.08.2026
+    conference_end: 26.08.2026
+    early_bird_deadline: 01.05.2026
+    registration_price: USD 1200+
+    location: Salt Lake City, USA
+    website: https://smallsat.org/
+  - name: Paris Space Week
+    acronym: PSW
+    focus: space
+    conference_start: 10.03.2026
+    conference_end: 11.03.2026
+    early_bird_deadline: 20.01.2026
+    registration_price: EUR 200+
+    location: Paris, France
+    website: https://www.paris-space-week.com/conferences
+
+  - name: Tech Tour Space
+    acronym: space conf
+    focus: space
+    conference_start: 10.09.2026
+    conference_end: 11.09.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: EUR 300
+    location: Bodo, Norway
+    website: https://techtour.com/space26/
+
+  - name: UN-Spider Conference
+    acronym: UN-spider
+    focus: disaster response
+    conference_start: 16.09.2026
+    conference_end: 18.09.2026
+    early_bird_deadline: 31.05.2026
+    registration_price: EUR 195
+    location: Beijing, China
+    website: https://www.unoosa.org/oosa/en/ourwork/psa/schedule/2026/11th-annual-un-spider-conference-and-training-programme.html
+
+  - name: European Space Forum
+    acronym: space conf
+    focus: space
+    conference_start: 30.06.2026
+    conference_end: 01.07.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: EUR 195
+    location: Brussels, Belgium
+    website: https://euspaceforum.com/
+
+  - name: European Space Conference
+    acronym: space conf
+    focus: space
+    conference_start: 26.01.2027
+    conference_end: 27.01.2027
+    early_bird_deadline: 20.03.2026
+    registration_price: TBD
+    location: Brussels, Belgium
+    website: https://spaceconference.eu/
+
+  - name: SatShow
+    acronym: satshow
+    focus: satelite provider
+    conference_start: 08.03.2027
+    conference_end: 11.03.2027
+    early_bird_deadline: 20.03.2026
+    registration_price: USD 2,700
+    location: Washington, DC, USA
+    website: https://www.satshow.com
+
+  - name: Space Symposium
+    acronym: Space
+    focus: space
+    conference_start: 12.04.2027
+    conference_end: 15.04.2027
+    early_bird_deadline: 20.03.2026
+    registration_price: USD 3,560+
+    location: Colorado, USA
+    website: https://eof.esa.int/event/living-planet-symposium/
+
+  - name: Living Planet Symposium
+    acronym: Living EO
+    focus: EO
+    conference_start: 23.06.2026
+    conference_end: 25.06.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: TBD
+    location: Vienna, Austria
+    website: https://eof.esa.int/event/living-planet-symposium/
+
+  - name: ESA Sat EO
+    acronym: Sat EO
+    focus: EO
+    conference_start: 05.05.2026
+    conference_end: 07.05.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: TBD
+    location: Frascati, Italy
+    website: https://stateo26.esa.int/
+
+  - name: Deep Tech
+    acronym: DTM
+    focus: invesment
+    conference_start: 19.05.2026
+    conference_end: 20.05.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: EUR 499
+    location: Berlin, Germany
+    website: https://www.deeptech.build/
+
+  - name: ESA Innovation Summit
+    acronym: IS
+    focus: innovation
+    conference_start: 23.06.2026
+    conference_end: 25.06.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: EUR 70
+    location: Frascati, Italy
+    website: https://philab.esa.int/phinnovation/
+
+  - name: ESA Industry Space Days
+    acronym: Industry Space Days
+    focus: space
+    conference_start: 16.09.2026
     conference_end: 17.09.2026
-    early_bird_deadline: 30.06.2026
-    registration_price: GBP 360 member / GBP 410 non-member early bird
-    location: University of Warwick, UK
-    website: https://ukeo.org/
+    early_bird_deadline: 20.03.2026
+    registration_price: EUR 60
+    location: ESA/ESTEC Noordwijk, The Netherlands
+    website: https://neospace-europe.lu
+
+  - name: Neo Space Europe
+    acronym: Neo Space
+    focus: new space
+    conference_start: 19.10.2026
+    conference_end: 20.10.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: TBD
+    location: Luxembourg
+    website: https://neospace-europe.lu
+
+  - name: 4s Symposium
+    acronym: 4s
+    focus: satellite provider
+    conference_start: 04.05.2026
+    conference_end: 08.05.2026
+    early_bird_deadline: 20.03.2026
+    registration_price: EUR 1100
+    location: Amsterdan, Netherlands
+    website: https://atpi.eventsair.com/4s-symposium-2026/registration1
+
+  - name: Small Sat Europe
+    acronym: Small Sat
+    focus: satellite provider
+    conference_start: 17.05.2026
+    conference_end: 19.05.2026
+    early_bird_deadline: 17.05.2026
+    registration_price: EUR 300
+    location: Amsterdan, Netherlands
+    website: https://smallsateurope.com/
+
+  - name: Space Tech Expo Europe
+    acronym: Tech Expo
+    focus: Earth Observation
+    conference_start: 17.11.2026
+    conference_end: 19.11.2026
+    early_bird_deadline: 17.11.2026
+    registration_price: Free
+    location: Bremen, Germany
+    website: https://www.spacetechexpo-europe.com/
+
+  - name: ESA Commercialization Forum
+    acronym: CommEO
+    focus: Earth Observation
+    conference_start: 12.05.2026
+    conference_end: 14.05.2026
+    early_bird_deadline: 30.03.2026
+    registration_price: EUR 300 early bird
+    location: Seville, Spain
+    website: https://philab.esa.int/commeo/
 
   - name: International Satcoms Conference
     acronym: ISC 2026
@@ -31,15 +230,15 @@ conferences:
     location: London, UK
     website: https://spaceandcommunications.theiet.org/
 
-  - name: ASCENDxTexas 2026
-    acronym: ASCENDxTexas
-    focus: LEO / Commercial Space
-    conference_start: 25.02.2026
-    conference_end: 26.02.2026
+  - name: ESA Space for Inspiration
+    acronym: SPI
+    focus: Commercial Space
+    conference_start: 01.09.2026
+    conference_end: 02.09.2026
     early_bird_deadline: 03.02.2026
-    registration_price: USD 349 AIAA member / USD 399 nonmember early bird
-    location: Houston, Texas, USA
-    website: https://www.ascend.events/ascendx/ascendxtexas-2026/
+    registration_price: EUR 349 early bird
+    location: Copenhagen Denmark
+    website: https://bsgn.esa.int/s4i-2026/
 
   - name: Earth Observation for Official Statistics Conference 2026
     acronym: StatEO26
@@ -50,3 +249,4 @@ conferences:
     registration_price: Free
     location: Frascati, Italy
     website: https://stateo26.esa.int/
+
