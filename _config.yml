@@ -1,0 +1,8 @@
+title: "Space Conference Tracker"
+repository: "leotrek/space-confs"
+theme: minima
+plugins:
+  - jekyll-github-metadata
+  - jekyll-feed
+include:
+  - _data

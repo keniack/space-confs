@@ -1,0 +1,1046 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track space, LEO, and Earth observation conferences by conference date, early bird deadline, and registration price.">
+    <title>Space Conference Tracker</title>
+    <style>
+        :root {
+            --night: #08121f;
+            --night-soft: #10233a;
+            --sky: #1f4f7a;
+            --ice: #dbeaf6;
+            --sand: #f1e0b8;
+            --amber: #c98933;
+            --paper: #fbfdff;
+            --card: rgba(255, 255, 255, 0.9);
+            --line: rgba(15, 34, 54, 0.12);
+            --ink: #112235;
+            --muted: #56677d;
+            --shadow: 0 18px 44px rgba(10, 28, 45, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top, rgba(67, 126, 177, 0.22), transparent 36%),
+                linear-gradient(180deg, #edf5fb 0%, #f8fbfe 28%, #f4efe3 100%);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .hero {
+            padding: 44px 20px 40px;
+            color: #f5fbff;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(126, 176, 224, 0.28), transparent 24%),
+                radial-gradient(circle at 82% 0%, rgba(241, 224, 184, 0.16), transparent 26%),
+                linear-gradient(145deg, var(--night) 0%, var(--night-soft) 44%, var(--sky) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-inner,
+        .content,
+        .footer {
+            width: min(1080px, calc(100% - 24px));
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero h1,
+        .section-header h2,
+        .submit-header h2,
+        .stat-card strong {
+            font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+        }
+
+        .hero h1 {
+            margin: 18px 0 0;
+            max-width: 760px;
+            font-size: clamp(2.2rem, 4.8vw, 4rem);
+            line-height: 1.03;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p {
+            margin: 16px 0 0;
+            max-width: 700px;
+            line-height: 1.7;
+            color: rgba(245, 251, 255, 0.88);
+            font-size: 1rem;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            text-decoration: none;
+            font: inherit;
+            cursor: pointer;
+            transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+        }
+
+        .hero-link:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .content {
+            padding: 26px 0 56px;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card,
+        .filters,
+        .submit-card,
+        .conference-item,
+        .empty-state {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .stat-card {
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.44);
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82));
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .stat-card strong {
+            display: block;
+            margin-top: 10px;
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .stat-card small {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            line-height: 1.5;
+            font-size: 0.92rem;
+        }
+
+        .filters,
+        .submit-card,
+        .conference-item,
+        .empty-state {
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.84));
+            box-shadow: var(--shadow);
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(180px, 0.7fr);
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+        }
+
+        .filter-field label,
+        .submit-field label,
+        .meta-block label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .filter-field input,
+        .filter-field select,
+        .submit-field input {
+            width: 100%;
+            min-height: 44px;
+            padding: 0 14px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--ink);
+            font: inherit;
+        }
+
+        .filter-field input:focus,
+        .filter-field select:focus,
+        .submit-field input:focus {
+            outline: 2px solid rgba(31, 79, 122, 0.18);
+            border-color: rgba(31, 79, 122, 0.35);
+        }
+
+        .submit-card {
+            padding: 18px;
+            border-radius: 22px;
+            margin-bottom: 18px;
+        }
+
+        .submit-header,
+        .conference-top,
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .submit-header {
+            margin-bottom: 14px;
+        }
+
+        .submit-header h2,
+        .section-header h2 {
+            margin: 0;
+            color: var(--night);
+        }
+
+        .submit-header p,
+        .section-header p,
+        .results-note,
+        .footer,
+        .conference-subtitle,
+        .submit-feedback {
+            color: var(--muted);
+        }
+
+        .submit-header p,
+        .section-header p {
+            margin: 6px 0 0;
+            line-height: 1.6;
+        }
+
+        .submit-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px 14px;
+        }
+
+        .submit-field--full {
+            grid-column: 1 / -1;
+        }
+
+        .submit-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .primary-button,
+        .section-toggle {
+            min-height: 42px;
+            padding: 0 16px;
+            border-radius: 999px;
+            font: inherit;
+            cursor: pointer;
+            transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+        }
+
+        .primary-button {
+            border: 0;
+            background: linear-gradient(135deg, var(--night) 0%, var(--sky) 100%);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .primary-button:hover,
+        .section-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .section-toggle {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.86);
+            color: var(--night);
+        }
+
+        .submit-feedback {
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .results-note {
+            margin: 0 0 6px;
+            font-size: 0.94rem;
+        }
+
+        .section {
+            margin-top: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 1.55rem;
+        }
+
+        .conference-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .conference-list.is-collapsed {
+            display: none;
+        }
+
+        .conference-item {
+            padding: 18px;
+            border-radius: 22px;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+
+        .conference-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 24px 52px rgba(10, 28, 45, 0.15);
+            border-color: rgba(31, 79, 122, 0.24);
+        }
+
+        .conference-title {
+            color: var(--night);
+            text-decoration: none;
+        }
+
+        .conference-title:hover {
+            text-decoration: underline;
+        }
+
+        .conference-title strong {
+            display: block;
+            font-size: 1.06rem;
+            line-height: 1.4;
+        }
+
+        .conference-subtitle {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .badge-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 32px;
+            padding: 0 12px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .badge--status {
+            background: rgba(8, 18, 31, 0.08);
+            color: var(--night);
+        }
+
+        .badge--focus {
+            background: rgba(201, 137, 51, 0.13);
+            color: #8b5d19;
+        }
+
+        .badge--early-open {
+            background: rgba(68, 133, 97, 0.12);
+            color: #2d6546;
+        }
+
+        .badge--early-closed {
+            background: rgba(167, 72, 54, 0.12);
+            color: #8a3c2d;
+        }
+
+        .badge--early-tbd {
+            background: rgba(86, 103, 125, 0.1);
+            color: var(--muted);
+        }
+
+        .conference-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .meta-block {
+            padding: 13px 14px;
+            border-radius: 16px;
+            background: rgba(244, 248, 252, 0.9);
+            border: 1px solid rgba(17, 34, 53, 0.06);
+        }
+
+        .meta-block span {
+            display: block;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .empty-state {
+            padding: 28px 20px;
+            border-radius: 22px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .footer {
+            padding: 0 0 38px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: var(--night);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 860px) {
+            .summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .filters,
+            .submit-form,
+            .conference-meta,
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-links,
+            .submit-actions,
+            .conference-top,
+            .section-header,
+            .submit-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-inner">
+            <span class="eyebrow">Space / LEO / Earth Observation</span>
+            <h1>Track the conference date, early bird deadline, and registration price.</h1>
+            <p>
+                This tracker is now focused on conferences related to space systems, low Earth orbit,
+                and Earth observation. The dataset is intentionally simple: event dates, early bird timing,
+                pricing, and the official source page.
+            </p>
+            <div class="hero-links">
+                <a class="hero-link" href="https://github.com/leotrek/space-confs" target="_blank" rel="noreferrer">Source Code</a>
+                <a class="hero-link" href="https://github.com/leotrek/space-confs/graphs/contributors" target="_blank" rel="noreferrer">Contributors</a>
+                <button class="hero-link" id="add-conference-toggle" type="button" aria-expanded="false" aria-controls="add-conference-panel">Add Conference</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="summary" id="summary"></section>
+
+        <section class="filters" aria-label="Conference filters">
+            <div class="filter-field">
+                <label for="name-filter">Search</label>
+                <input id="name-filter" type="search" placeholder="Search by conference, acronym, location, or focus area">
+            </div>
+            <div class="filter-field">
+                <label for="focus-filter">Focus Area</label>
+                <select id="focus-filter"></select>
+            </div>
+        </section>
+
+        <section class="submit-card" id="add-conference-panel" aria-labelledby="submit-title" hidden>
+            <div class="submit-header">
+                <div>
+                    <h2 id="submit-title">Add a conference</h2>
+                    <p>
+                        Submit a public conference URL. The workflow can try to pull the dates, early bird deadline,
+                        and registration price from that page before opening a PR.
+                    </p>
+                </div>
+                <button class="section-toggle" id="close-submission-form" type="button">Hide</button>
+            </div>
+
+            <form class="submit-form" id="submission-form">
+                <div class="submit-field submit-field--full">
+                    <label for="submission-conference">Conference name or acronym</label>
+                    <input id="submission-conference" name="conference" type="text" required>
+                </div>
+                <div class="submit-field submit-field--full">
+                    <label for="submission-website">Official event or registration URL</label>
+                    <input id="submission-website" name="website" type="url" placeholder="https://example.org/event" required>
+                </div>
+            </form>
+
+            <div class="submit-actions">
+                <button class="primary-button" type="submit" form="submission-form">Create GitHub Submission</button>
+                <p class="submit-feedback" id="submission-feedback"></p>
+            </div>
+        </section>
+
+        <p class="results-note" id="results-note">Showing all tracked conferences.</p>
+
+        <section class="section">
+            <div class="section-header">
+                <div>
+                    <h2 id="upcoming-title">Upcoming Conferences</h2>
+                    <p>Sorted by the nearest conference start date.</p>
+                </div>
+                <button class="section-toggle" id="upcoming-toggle" type="button" aria-expanded="true">Hide</button>
+            </div>
+            <div class="conference-list" id="upcoming-conferences"></div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div>
+                    <h2 id="undated-title">Date TBD</h2>
+                    <p>Entries that still need a confirmed conference date.</p>
+                </div>
+                <button class="section-toggle" id="undated-toggle" type="button" aria-expanded="true">Hide</button>
+            </div>
+            <div class="conference-list" id="undated-conferences"></div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div>
+                    <h2 id="past-title">Archive</h2>
+                    <p>Past events kept for reference.</p>
+                </div>
+                <button class="section-toggle" id="past-toggle" type="button" aria-expanded="true">Hide</button>
+            </div>
+            <div class="conference-list" id="past-conferences"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Data source: <a href="https://github.com/leotrek/space-confs/blob/main/_data/conferences.yaml" target="_blank" rel="noreferrer">_data/conferences.yaml</a></p>
+        <p>Submission flow: homepage form -> GitHub issue -> workflow-generated pull request.</p>
+    </footer>
+
+    <script>
+        {% assign conference_data = site.data.conferences.conferences | default: empty %}
+        const conferences = {{ conference_data | jsonify }};
+        const repositoryUrl = "https://github.com/leotrek/space-confs";
+        const submissionMarker = "<!-- conference-submission -->";
+        const state = {
+            query: "",
+            focus: "all",
+            collapsed: {
+                upcoming: false,
+                undated: false,
+                past: false
+            }
+        };
+
+        function parseDate(value) {
+            if (!value || typeof value !== "string") {
+                return null;
+            }
+
+            const match = value.trim().match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+            if (!match) {
+                return null;
+            }
+
+            const [, day, month, year] = match;
+            const parsed = new Date(Number(year), Number(month) - 1, Number(day));
+            if (Number.isNaN(parsed.getTime())) {
+                return null;
+            }
+            parsed.setHours(0, 0, 0, 0);
+            return parsed;
+        }
+
+        function formatDate(value) {
+            const parsed = parseDate(value);
+            if (!parsed) {
+                return "TBD";
+            }
+
+            return new Intl.DateTimeFormat("en", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }).format(parsed);
+        }
+
+        function formatDateRange(conference) {
+            const start = parseDate(conference.conference_start);
+            const end = parseDate(conference.conference_end);
+
+            if (!start && !end) {
+                return "TBD";
+            }
+
+            if (start && end && start.getTime() !== end.getTime()) {
+                return `${formatDate(conference.conference_start)} - ${formatDate(conference.conference_end)}`;
+            }
+
+            return formatDate(conference.conference_start || conference.conference_end);
+        }
+
+        function today() {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+            return now;
+        }
+
+        function daysBetween(targetDate) {
+            if (!targetDate) {
+                return null;
+            }
+            return Math.round((targetDate.getTime() - today().getTime()) / 86400000);
+        }
+
+        function normalizedFocus(conference) {
+            const value = (conference.focus || "").trim();
+            return value || "Unspecified";
+        }
+
+        function conferencePhase(conference) {
+            const start = parseDate(conference.conference_start);
+            const end = parseDate(conference.conference_end) || start;
+            const currentDay = today();
+
+            if (!start) {
+                return "undated";
+            }
+            if (end && currentDay > end) {
+                return "past";
+            }
+            if (end && currentDay >= start && currentDay <= end) {
+                return "live";
+            }
+            return "upcoming";
+        }
+
+        function statusLabel(conference) {
+            const phase = conferencePhase(conference);
+            const start = parseDate(conference.conference_start);
+            const untilStart = daysBetween(start);
+
+            if (phase === "undated") {
+                return "Date TBD";
+            }
+            if (phase === "past") {
+                return "Past";
+            }
+            if (phase === "live") {
+                return "Live Now";
+            }
+            if (untilStart === 0) {
+                return "Starts Today";
+            }
+            if (untilStart === 1) {
+                return "Starts Tomorrow";
+            }
+            if (typeof untilStart === "number" && untilStart > 1) {
+                return `${untilStart}d to go`;
+            }
+            return "Upcoming";
+        }
+
+        function earlyBirdState(conference) {
+            const deadline = parseDate(conference.early_bird_deadline);
+            if (!deadline) {
+                return { label: "Early bird TBD", className: "badge--early-tbd" };
+            }
+
+            const delta = daysBetween(deadline);
+            if (delta < 0) {
+                return { label: "Early bird closed", className: "badge--early-closed" };
+            }
+            if (delta === 0) {
+                return { label: "Early bird ends today", className: "badge--early-open" };
+            }
+            return { label: "Early bird open", className: "badge--early-open" };
+        }
+
+        function registrationPrice(conference) {
+            const value = (conference.registration_price || "").trim();
+            return value || "TBD";
+        }
+
+        function compareAscendingByStart(left, right) {
+            const leftDate = parseDate(left.conference_start);
+            const rightDate = parseDate(right.conference_start);
+            if (!leftDate && !rightDate) {
+                return left.name.localeCompare(right.name);
+            }
+            if (!leftDate) {
+                return 1;
+            }
+            if (!rightDate) {
+                return -1;
+            }
+            return leftDate - rightDate;
+        }
+
+        function compareDescendingByEnd(left, right) {
+            const leftDate = parseDate(left.conference_end) || parseDate(left.conference_start);
+            const rightDate = parseDate(right.conference_end) || parseDate(right.conference_start);
+            if (!leftDate && !rightDate) {
+                return left.name.localeCompare(right.name);
+            }
+            if (!leftDate) {
+                return 1;
+            }
+            if (!rightDate) {
+                return -1;
+            }
+            return rightDate - leftDate;
+        }
+
+        function conferenceMatchesFilters(conference) {
+            const focus = normalizedFocus(conference);
+            if (state.focus !== "all" && focus !== state.focus) {
+                return false;
+            }
+
+            if (!state.query) {
+                return true;
+            }
+
+            const haystack = [
+                conference.name,
+                conference.acronym,
+                focus,
+                conference.location,
+                conference.registration_price
+            ].join(" ").toLowerCase();
+            return haystack.includes(state.query);
+        }
+
+        function renderSummaryCards(filtered) {
+            const upcomingCount = filtered.filter((conference) => {
+                const phase = conferencePhase(conference);
+                return phase === "upcoming" || phase === "live";
+            }).length;
+            const earlyBirdOpenCount = filtered.filter((conference) => {
+                return earlyBirdState(conference).className === "badge--early-open";
+            }).length;
+            const focusCount = new Set(filtered.map(normalizedFocus)).size;
+
+            const cards = [
+                {
+                    label: "Tracked",
+                    value: filtered.length,
+                    note: "Conferences currently in the dataset."
+                },
+                {
+                    label: "Upcoming",
+                    value: upcomingCount,
+                    note: "Future events plus any conference currently live."
+                },
+                {
+                    label: "Early Bird Open",
+                    value: earlyBirdOpenCount,
+                    note: "Entries where the early bird deadline has not passed yet."
+                },
+                {
+                    label: "Focus Areas",
+                    value: focusCount,
+                    note: "Unique focus tags across the filtered results."
+                }
+            ];
+
+            document.getElementById("summary").innerHTML = cards.map((card) => `
+                <article class="stat-card">
+                    <span>${card.label}</span>
+                    <strong>${card.value}</strong>
+                    <small>${card.note}</small>
+                </article>
+            `).join("");
+        }
+
+        function renderConference(conference) {
+            const earlyBird = earlyBirdState(conference);
+            const location = (conference.location || "").trim() || "Location TBD";
+            const focus = normalizedFocus(conference);
+
+            return `
+                <article class="conference-item">
+                    <div class="conference-top">
+                        <a href="${conference.website}" target="_blank" rel="noreferrer" class="conference-title">
+                            <strong>${conference.acronym}: ${conference.name}</strong>
+                            <span class="conference-subtitle">${location}</span>
+                        </a>
+                        <span class="badge badge--status">${statusLabel(conference)}</span>
+                    </div>
+
+                    <div class="badge-row">
+                        <span class="badge badge--focus">${focus}</span>
+                        <span class="badge ${earlyBird.className}">${earlyBird.label}</span>
+                    </div>
+
+                    <div class="conference-meta">
+                        <div class="meta-block">
+                            <label>Conference Date</label>
+                            <span>${formatDateRange(conference)}</span>
+                        </div>
+                        <div class="meta-block">
+                            <label>Early Bird Deadline</label>
+                            <span>${formatDate(conference.early_bird_deadline)}</span>
+                        </div>
+                        <div class="meta-block">
+                            <label>Registration Price</label>
+                            <span>${registrationPrice(conference)}</span>
+                        </div>
+                        <div class="meta-block">
+                            <label>Official Website</label>
+                            <span><a href="${conference.website}" target="_blank" rel="noreferrer">Open source page</a></span>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderList(containerId, list) {
+            const container = document.getElementById(containerId);
+            if (!list.length) {
+                container.innerHTML = '<div class="empty-state">No conferences in this section yet.</div>';
+                return;
+            }
+            container.innerHTML = list.map(renderConference).join("");
+        }
+
+        function updateResultsNote(filteredCount, totalCount) {
+            const note = document.getElementById("results-note");
+            if (totalCount === 0) {
+                note.textContent = "No conferences tracked yet. Add the first one from the button above.";
+                return;
+            }
+            if (filteredCount === totalCount) {
+                note.textContent = `Showing all ${totalCount} tracked conferences.`;
+                return;
+            }
+            if (filteredCount === 0) {
+                note.textContent = "No conferences match the current filters.";
+                return;
+            }
+            note.textContent = `Showing ${filteredCount} of ${totalCount} tracked conferences.`;
+        }
+
+        function updateCollapseButton(sectionKey, count) {
+            const button = document.getElementById(`${sectionKey}-toggle`);
+            const title = document.getElementById(`${sectionKey}-title`);
+            const isCollapsed = state.collapsed[sectionKey];
+            const labels = {
+                upcoming: "Upcoming Conferences",
+                undated: "Date TBD",
+                past: "Archive"
+            };
+
+            button.textContent = isCollapsed ? "Show" : "Hide";
+            button.setAttribute("aria-expanded", String(!isCollapsed));
+            title.textContent = `${labels[sectionKey]} (${count})`;
+            document.getElementById(`${sectionKey}-conferences`).classList.toggle("is-collapsed", isCollapsed);
+        }
+
+        function renderFocusOptions() {
+            const select = document.getElementById("focus-filter");
+            const values = Array.from(new Set(conferences.map(normalizedFocus))).sort((left, right) => left.localeCompare(right));
+            select.innerHTML = [
+                '<option value="all">All focus areas</option>',
+                ...values.map((value) => `<option value="${value}">${value}</option>`)
+            ].join("");
+            select.value = state.focus;
+        }
+
+        function renderPage() {
+            const filtered = conferences.filter(conferenceMatchesFilters);
+            const upcoming = filtered
+                .filter((conference) => {
+                    const phase = conferencePhase(conference);
+                    return phase === "upcoming" || phase === "live";
+                })
+                .sort(compareAscendingByStart);
+            const undated = filtered
+                .filter((conference) => conferencePhase(conference) === "undated")
+                .sort((left, right) => left.name.localeCompare(right.name));
+            const past = filtered
+                .filter((conference) => conferencePhase(conference) === "past")
+                .sort(compareDescendingByEnd);
+
+            renderSummaryCards(filtered);
+            renderList("upcoming-conferences", upcoming);
+            renderList("undated-conferences", undated);
+            renderList("past-conferences", past);
+            updateResultsNote(filtered.length, conferences.length);
+            updateCollapseButton("upcoming", upcoming.length);
+            updateCollapseButton("undated", undated.length);
+            updateCollapseButton("past", past.length);
+        }
+
+        function normalizeTextInput(value) {
+            return value.trim().replace(/\s+/g, " ");
+        }
+
+        function buildSubmissionIssueUrl(formData) {
+            const payload = {
+                conference: normalizeTextInput(formData.get("conference") || ""),
+                website: normalizeTextInput(formData.get("website") || "")
+            };
+
+            const title = `Add conference: ${payload.conference}`;
+            const body = [
+                submissionMarker,
+                "### Conference Submission",
+                "",
+                `- Conference: ${payload.conference}`,
+                `- Website: ${payload.website}`
+            ].join("\n");
+
+            return `${repositoryUrl}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function isDisallowedConferenceUrl(value) {
+            try {
+                const hostname = new URL(value).hostname.toLowerCase();
+                return ["easychair", "hotcrp", "edas"].some((fragment) => hostname.includes(fragment));
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function setSubmissionPanelOpen(isOpen) {
+            const panel = document.getElementById("add-conference-panel");
+            const toggle = document.getElementById("add-conference-toggle");
+            panel.hidden = !isOpen;
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            toggle.textContent = isOpen ? "Hide Add Conference" : "Add Conference";
+            if (isOpen) {
+                panel.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }
+
+        document.getElementById("name-filter").addEventListener("input", (event) => {
+            state.query = event.target.value.trim().toLowerCase();
+            renderPage();
+        });
+
+        document.getElementById("focus-filter").addEventListener("change", (event) => {
+            state.focus = event.target.value;
+            renderPage();
+        });
+
+        ["upcoming", "undated", "past"].forEach((sectionKey) => {
+            document.getElementById(`${sectionKey}-toggle`).addEventListener("click", () => {
+                state.collapsed[sectionKey] = !state.collapsed[sectionKey];
+                const visibleCount = document.querySelectorAll(`#${sectionKey}-conferences .conference-item`).length;
+                updateCollapseButton(sectionKey, visibleCount);
+            });
+        });
+
+        document.getElementById("add-conference-toggle").addEventListener("click", () => {
+            setSubmissionPanelOpen(document.getElementById("add-conference-panel").hidden);
+        });
+
+        document.getElementById("close-submission-form").addEventListener("click", () => {
+            setSubmissionPanelOpen(false);
+        });
+
+        document.getElementById("submission-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const form = event.target;
+            if (!form.reportValidity()) {
+                return;
+            }
+
+            const feedback = document.getElementById("submission-feedback");
+            const website = form.elements.website.value;
+            if (isDisallowedConferenceUrl(website)) {
+                feedback.textContent = "Use the public event page instead of an EasyChair, HotCRP, or EDAS URL.";
+                return;
+            }
+
+            const issueUrl = buildSubmissionIssueUrl(new FormData(form));
+            const newWindow = window.open(issueUrl, "_blank", "noopener,noreferrer");
+            if (newWindow) {
+                feedback.textContent = "GitHub issue opened in a new tab. After you submit it there, the workflow can open a PR automatically.";
+                return;
+            }
+
+            feedback.textContent = "Opening GitHub in the current tab.";
+            window.location.href = issueUrl;
+        });
+
+        renderFocusOptions();
+        renderPage();
+    </script>
+</body>
+</html>
