@@ -499,8 +499,8 @@
                 pricing, and the official source page.
             </p>
             <div class="hero-links">
-                <a class="hero-link" href="https://github.com/leotrek/space-confs" target="_blank" rel="noreferrer">Source Code</a>
-                <a class="hero-link" href="https://github.com/leotrek/space-confs/graphs/contributors" target="_blank" rel="noreferrer">Contributors</a>
+                <a class="hero-link" href="https://github.com/keniack/space-confs" target="_blank" rel="noreferrer">Source Code</a>
+                <a class="hero-link" href="https://github.com/keniack/space-confs/graphs/contributors" target="_blank" rel="noreferrer">Contributors</a>
                 <button class="hero-link" id="add-conference-toggle" type="button" aria-expanded="false" aria-controls="add-conference-panel">Add Conference</button>
             </div>
         </div>
@@ -586,14 +586,14 @@
     </main>
 
     <footer class="footer">
-        <p>Data source: <a href="https://github.com/leotrek/space-confs/blob/main/_data/conferences.yaml" target="_blank" rel="noreferrer">_data/conferences.yaml</a></p>
+        <p>Data source: <a href="https://github.com/keniack/space-confs/blob/main/_data/conferences.yaml" target="_blank" rel="noreferrer">_data/conferences.yaml</a></p>
         <p>Submission flow: homepage form -> GitHub issue -> workflow-generated pull request.</p>
     </footer>
 
     <script>
         {% assign conference_data = site.data.conferences.conferences | default: empty %}
         const conferences = {{ conference_data | jsonify }};
-        const repositoryUrl = "https://github.com/leotrek/space-confs";
+        const repositoryUrl = "https://github.com/keniack/space-confs";
         const submissionMarker = "<!-- conference-submission -->";
         const state = {
             query: "",
