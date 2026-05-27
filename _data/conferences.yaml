@@ -1,13 +1,83 @@
 # Example entries to seed the tracker.
 # Dates use DD.MM.YYYY.
 conferences:
+  - name: Symposium on Artificial Intelligence, Robotics and Automation in Space
+    acronym: i-Sairas
+    focus: space
+    conference_start: 03.11.2026
+    conference_end: 06.11.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 800
+    location: Cologne, Germany
+    website: https://www.isairas-isparo.de/
+
+  - name: ESA Spaice
+    acronym: Spaice
+    focus: space
+    conference_start: 21.10.2026
+    conference_end: 23.10.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 340
+    location: Noordwijk, Netherlands
+    website: https://spaice.esa.int/2026/
+
+  - name: New Space Economy
+    acronym: New Space Economy
+    focus: space
+    conference_start: 26.1.2026
+    conference_end: 28.11.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 250
+    location: Fiera Roma, Italy
+    website: https://space-comm.com/
+
+  - name: Space-Com Expo Europe
+    acronym: SpaceCom Expo Europe
+    focus: space
+    conference_start: 24.02.2027
+    conference_end: 25.02.2027
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 300
+    location: London, UK
+    website: https://space-comm.com/
+
+  - name: Space Congress
+    acronym: SpaceCom Expo
+    focus: space
+    conference_start: 11.01.2027
+    conference_end: 14.01.2027
+    early_bird_deadline: 23.09.2026
+    registration_price: USD 1185
+    location: Orlando, Florida, USA
+    website: https://www.spacecomexpo.com
+
+  - name: EO Summit
+    acronym: EO Summit
+    focus: EO
+    conference_start: 22.06.2026
+    conference_end: 22.06.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 99
+    location: The brewery, London, UK
+    website: https://www.eosummit.com/
+
+  - name: Summit for Space Sustainability
+    acronym: Space Sustainability
+    focus: satellite business / operators / investors
+    conference_start: 04.11.2026
+    conference_end: 05.11.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: USD 150
+    location: Brasilia, Brazil
+    website: https://www.swfsummit.org/home
+
   - name: EU Space Days
     acronym: Space Days
     focus: satellite business / operators / investors
     conference_start: 26.05.2026
     conference_end: 27.05.2026
     early_bird_deadline: 01.06.2026
-    registration_price: EUR 2500+
+    registration_price: Free
     location: Nicosa, Cyprus
     website: https://defence-industry-space.ec.europa.eu/eu-space/eu-space-days-2026-nicosia-cyprus_en
     
@@ -56,8 +126,8 @@ conferences:
     focus: small satellites / onboard computing
     conference_start: 23.08.2026
     conference_end: 26.08.2026
-    early_bird_deadline: 01.05.2026
-    registration_price: USD 1200+
+    early_bird_deadline: 09.05.2026
+    registration_price: USD 875
     location: Salt Lake City, USA
     website: https://smallsat.org/
   - name: Paris Space Week
@@ -133,9 +203,9 @@ conferences:
   - name: Living Planet Symposium
     acronym: Living EO
     focus: EO
-    conference_start: 23.06.2026
-    conference_end: 25.06.2026
-    early_bird_deadline: 20.03.2026
+    conference_start: 23.06.2025
+    conference_end: 25.06.2025
+    early_bird_deadline: 20.03.2025
     registration_price: TBD
     location: Vienna, Austria
     website: https://eof.esa.int/event/living-planet-symposium/
