@@ -1,6 +1,26 @@
 # Example entries to seed the tracker.
 # Dates use DD.MM.YYYY.
 conferences:
+  - name: Beyond Exploration Expo
+    acronym: BEX
+    focus: space
+    conference_start: 23.09.2026
+    conference_end: 25.09.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 600
+    location: Rimini, Italy
+    website: https://www.bex-expo.space/en/
+    
+  - name: Berlin Air Show
+    acronym: ILA
+    focus: space
+    conference_start: 10.06.2026
+    conference_end: 14.06.2026
+    early_bird_deadline: 23.09.2026
+    registration_price: EUR 240
+    location: Berlin, Germany
+    website: https://www.ila-berlin.de/de
+    
   - name: Symposium on Artificial Intelligence, Robotics and Automation in Space
     acronym: i-Sairas
     focus: space
