@@ -1,6 +1,26 @@
 # Example entries to seed the tracker.
 # Dates use DD.MM.YYYY.
 conferences:
+  - name: Austria Space Days
+    acronym: ASD
+    focus: space
+    conference_start: 14.10.2026
+    conference_end: 15.10.2026
+    early_bird_deadline: 15.06.2026
+    registration_price: Free
+    location: Vienna, Austria
+    website: https://austrianspacedays.com/
+    
+  - name: Space Industry Workshop
+    acronym: SIW
+    focus: space
+    conference_start: 04.08.2026
+    conference_end: 07.08.2026
+    early_bird_deadline: 15.06.2026
+    registration_price: EUR 250 
+    location: Rio de Janeiro, Brazil
+    website: https://spaceindustry.aeb.gov.br/en/space-industry-workshop/
+    
   - name: Beyond Exploration Expo
     acronym: BEX
     focus: space
