@@ -1,6 +1,15 @@
 # Example entries to seed the tracker.
 # Dates use DD.MM.YYYY.
 conferences:
+  - name: EOCognitiveLab Mission
+    acronym: EOC
+    focus: space
+    conference_start: 29.09.2026
+    conference_end: 29.09.2026
+    early_bird_deadline: 15.06.2026
+    registration_price: Free
+    location: Frascati, Italy
+    website: https://philab.esa.int/event/eocognitivelab-mission-information-day/
   - name: Austria Space Days
     acronym: ASD
     focus: space
