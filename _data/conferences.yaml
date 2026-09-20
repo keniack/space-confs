@@ -1,6 +1,33 @@
 # Example entries to seed the tracker.
 # Dates use DD.MM.YYYY.
 conferences:
+  - name: Winter Satellite Workshop
+    acronym: MSS
+    focus: space
+    conference_start: 19.01.2027
+    conference_end: 21.01.2027
+    early_bird_deadline: 19.01.2027
+    registration_price: TBD
+    location: Helsinki, Finland
+    website: https://spaceworkshop.fi/
+  - name: Munich Space Summit
+    acronym: MSS
+    focus: space
+    conference_start: 15.03.2027
+    conference_end: 19.03.2027
+    early_bird_deadline: 15.03.2027
+    registration_price: TBD
+    location: Munich, Germany
+    website: https://www.munich-space-summit.org/
+  - name: New Space Economy
+    acronym: NSE
+    focus: space
+    conference_start: 25.06.2026
+    conference_end: 27.06.2026
+    early_bird_deadline: 15.06.2026
+    registration_price: Free
+    location: Rome, Italy
+    website: https://www.nseexpoforum.com/
   - name: EOCognitiveLab Mission
     acronym: EOC
     focus: space
